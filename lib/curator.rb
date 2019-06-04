@@ -6,11 +6,11 @@ class Curator
   end
 
   def add_photograph(photo)
-    @photographs << photo
+    @photographs << Photograph.new(photo)
   end
 
   def add_artist(artist)
-    @artists << artist
+    @artists << Artist.new(artist)
   end
 
   def find_artist_by_id(id)
@@ -41,8 +41,40 @@ class Curator
 
 # => artists_with_multiple_photographs -
   # => This method returns an Array of all Artists who have more than one photograph
+  # => 1) get artists_with_multiple photos
+  # def artists_with_multiple_photographs
+  #   artist_multiple_photos = []
+  #   @artists.each do |artist|
 
-  # def artists_with_multiple_photographs(artist, id)
+  #     @photographs.each do |photograph|
+  #       binding.pry
+  #       count_of_photos = photograph.each do |photo|
+  #         photo[:artist_id].count do |artist_id|
+  #         artist_id
+  #       end
+  #       if photograph[:artist_id] == artist[:id] && count_of_photos > 1
+  #         artist_multiple_photos << artist
+  #       end
+  #     end
+  #   end
+  #   artist_multiple_photos
+  # end
+
+  # multiple_photos = []
+  # photo_count = 0
+  # @artists.each do |artist|
+  #   @photographs.each do |photo|
+  #     # binding.pry
+  #     if photo[:artist_id] == artist[:id]
+  #       photo_count += 1
+  #       if photo_count > 1
+  #         multiple_photos << artist
+  #       end
+  #     end
+  #   end
+  # end
+  # multiple_photos
+
   #    multiple_photos = []
   #    find_photographs_by_artist(artist).each do |photo|
   #     if photo.count > 1

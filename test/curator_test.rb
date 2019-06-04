@@ -33,10 +33,10 @@ class ArtistTest < Minitest::Test
       year: "1941"
     }
 
-    @curator.add_photograph(photo_1)
-    @curator.add_photograph(photo_2)
-    assert_equal [photo_1, photo_2], @curator.photographs
-    assert_equal photo_1, @curator.photographs.first
+    p1 = @curator.add_photograph(photo_1).last
+    p2 = @curator.add_photograph(photo_2).last
+    assert_equal [p1, p2], @curator.photographs
+    assert_equal p1, @curator.photographs.first
     # assert_equal photo_1[:name], @curator.photographs.first.name
   end
 
@@ -57,11 +57,11 @@ class ArtistTest < Minitest::Test
       country: "United States"
     }
 
-    @curator.add_artist(artist_1)
-    @curator.add_artist(artist_2)
+    a1 = @curator.add_artist(artist_1)
+    a2 = @curator.add_artist(artist_2)
 
-    assert_equal [artist_1, artist_2], @curator.artists
-    assert_equal artist_1, @curator.artists.first
+    assert_equal [a1, a2], @curator.artists
+    assert_equal a1, @curator.artists.first
     # assert_equal "Henri Cartier-Bresson", @curator.artists.first.name
   end
 
@@ -82,10 +82,10 @@ class ArtistTest < Minitest::Test
       country: "United States"
     }
 
-    @curator.add_artist(artist_1)
-    @curator.add_artist(artist_2)
+    a1 = @curator.add_artist(artist_1)
+    a2 = @curator.add_artist(artist_2)
 
-    assert_equal artist_1, @curator.find_artist_by_id("1")
+    assert_equal a1, @curator.find_artist_by_id("1")
   end
 
   def test_it_finds_photo_by_id
@@ -104,10 +104,10 @@ class ArtistTest < Minitest::Test
       year: "1941"
     }
 
-    @curator.add_photograph(photo_1)
-    @curator.add_photograph(photo_2)
+    p1 = @curator.add_photograph(photo_1)
+    p2 = @curator.add_photograph(photo_2)
 
-    assert_equal photo_2, @curator.find_photograph_by_id("2")
+    assert_equal p2, @curator.find_photograph_by_id("2")
   end
 
   def test_it_finds_photo_by_artist
@@ -238,9 +238,9 @@ class ArtistTest < Minitest::Test
 
     diane_arbus = @curator.find_artist_by_id("3")
     @curator.find_photographs_by_artist(diane_arbus)
-    # assert_equal [artist_3], @curator.artists_with_multiple_photographs(diane_arbus, "3")
-    # assert_equal 1, @curator.artists_with_multiple_photographs.length
-    # assert diane_arbus == @curator.artists_with_multiple_photographs.first
+    assert_equal [artist_3], @curator.artists_with_multiple_photographs
+    assert_equal 1, @curator.artists_with_multiple_photographs.length
+    assert diane_arbus == @curator.artists_with_multiple_photographs.first
   end
 
   def test_it_finds_photos_taken_by_artist_from_country
@@ -296,14 +296,14 @@ class ArtistTest < Minitest::Test
       country: "United States"
     }
 
-    @curator.add_photograph(photo_1)
-    @curator.add_photograph(photo_2)
-    @curator.add_photograph(photo_3)
-    @curator.add_photograph(photo_4)
-    @curator.add_artist(artist_1)
-    @curator.add_artist(artist_2)
-    @curator.add_artist(artist_3)
+    p1 = @curator.add_photograph(photo_1)
+    p2 = @curator.add_photograph(photo_2)
+    p3 = @curator.add_photograph(photo_3)
+    p4 = @curator.add_photograph(photo_4)
+    a1 = @curator.add_artist(artist_1)
+    a2 = @curator.add_artist(artist_2)
+    a3 = @curator.add_artist(artist_3)
 
-    assert_equal [photo_2, photo_3, photo_4], @curator.photographs_taken_by_artist_from("United States")
+    assert_equal [p2, p3, p4], @curator.photographs_taken_by_artist_from("United States")
   end
 end
